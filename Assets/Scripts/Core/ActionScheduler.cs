@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RPG.Core
@@ -15,6 +16,12 @@ namespace RPG.Core
                 currentAction.Cancel();
             }
             currentAction = action;
+        }
+
+        internal void CancelCurrentAction()
+        {
+            if (currentAction == null) return;
+            currentAction.Cancel();
         }
     }
 }
