@@ -49,10 +49,16 @@ namespace RPG.Combat
             GetComponent<Animator>().SetTrigger("attack");
         }
 
-        public void SetAttackTarget(CombatTarget combatTarget)
+        public void SetAttackTarget(GameObject combatTarget)
         {
             target = combatTarget.GetComponent<Health>();
-            Debug.Log("Attack!");
+        }
+
+        public bool CanAttack(GameObject combatTarget)
+        {
+            if (combatTarget == null) { return false; }
+            Health targetToTest = combatTarget.GetComponent<Health>();
+            return targetToTest != null && !targetToTest.IsDead;
         }
 
         public void Cancel()

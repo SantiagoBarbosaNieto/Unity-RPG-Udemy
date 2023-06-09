@@ -8,6 +8,9 @@ using RPG.Combat;
 
 namespace RPG.Control
 {
+    [RequireComponent(typeof(Mover))]
+    [RequireComponent(typeof(Fighter))]
+    [RequireComponent(typeof(Health))]
     public class PlayerController : MonoBehaviour
     {
 
@@ -35,10 +38,9 @@ namespace RPG.Control
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
                 if(target == null) continue;
-
                 if(Input.GetMouseButtonDown(0))
                 {
-                    GetComponent<Fighter>().SetAttackTarget(target);
+                    GetComponent<Fighter>().SetAttackTarget(target.gameObject);
                 }
                 return true;
             }
@@ -48,17 +50,18 @@ namespace RPG.Control
 
         private bool InteractMovement()
         {
+            if(GetComponent<Health>() == null || GetComponent<Health>().IsDead) return false;
             Ray ray = GetMouseRay();
-            RaycastHit hit;
-            bool hasHit = Physics.Raycast(ray, out hit);
-            if(hasHit)
-            {
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+            foreach(RaycastHit hit in hits)
+            { 
+                if (hit.transform.gameObject == gameObject) continue;
                 if(Input.GetMouseButton(0))
                     MovePlayerTarget(hit.point); 
 
                 if(isEditor)
                 {
-                    Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 0.01f, true);
+                    Debug.DrawRay(ray.origin, ray.direction * 10, Color.red, 0.01f, true);
                 }
                  
                 return true;
