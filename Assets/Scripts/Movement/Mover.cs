@@ -48,7 +48,7 @@ namespace RPG.Movement
     public void StartMoveAction(Vector3 point)
     {
         GetComponent<ActionScheduler>().StartAction(this);
-        MoveTarget(point);
+        MoveTarget(point); 
     }
 
     public void MoveTarget(Vector3 point)
@@ -58,14 +58,9 @@ namespace RPG.Movement
 
     }
 
-    public void Stop()
-    {
-        navMeshAgent.isStopped = true;
-    }
-
     public void Cancel()
     {
-        Stop();
+        navMeshAgent.isStopped = true;
     }
 
     private void UpdateTarget()

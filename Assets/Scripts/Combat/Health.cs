@@ -8,7 +8,11 @@ namespace RPG.Combat
         [SerializeField] float MaxHealth = 10f;
         float CurrentHealth = 0f;
 
-        bool isDead = false;
+        private bool isDead = false;
+
+        //Expose variables inline
+        public bool IsDead { get { return isDead; } }
+
 
         public void Start()
         {

@@ -10,23 +10,31 @@ namespace RPG.Combat
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float attackSpeed = 1f;
         [SerializeField] float weaponDamage = 5f;
+        
+        float timeBetweenAttacks = 1;
 
-        Transform target = null;
+        Health target = null;
 
         float timeSinceLastAttack = 0f; 
+
+        private void Awake()
+        {
+            timeBetweenAttacks = 1/attackSpeed;
+        }
+
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
-            if(target == null) return;
+            if(target == null || target.IsDead) return;
         
-            bool isInRange = Vector3.Distance(transform.position, target.position) < weaponRange;
+            bool isInRange = Vector3.Distance(transform.position, target.transform.position) < weaponRange;
             if(!isInRange)
             {
-                GetComponent<Mover>().MoveTarget(target.position);
+                GetComponent<Mover>().MoveTarget(target.transform.position);
             }
             else
             {
-                GetComponent<Mover>().Stop();
+                GetComponent<Mover>().Cancel();
                 GetComponent<ActionScheduler>().StartAction(this);
                 AttackBehaviour();
             }
@@ -34,20 +42,24 @@ namespace RPG.Combat
 
         private void AttackBehaviour()
         {
-            float timeBetweenAttacks = 1/attackSpeed;
+            transform.LookAt(target.transform);
             if(timeSinceLastAttack < timeBetweenAttacks) return;
             timeSinceLastAttack = 0f;
+            GetComponent<Animator>().ResetTrigger("stopAttacking");
             GetComponent<Animator>().SetTrigger("attack");
         }
 
-        public void Attack(CombatTarget combatTarget)
+        public void SetAttackTarget(CombatTarget combatTarget)
         {
-            target = combatTarget.transform;
+            target = combatTarget.GetComponent<Health>();
             Debug.Log("Attack!");
         }
 
         public void Cancel()
         {
+            GetComponent<Animator>().ResetTrigger("attack");
+            GetComponent<Animator>().SetTrigger("stopAttacking");
+            timeSinceLastAttack = timeBetweenAttacks;
             target = null;
         }
         
