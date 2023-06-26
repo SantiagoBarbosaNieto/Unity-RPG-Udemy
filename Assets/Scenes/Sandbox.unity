@@ -1027,7 +1027,12 @@ PrefabInstance:
       propertyPath: weaponRange
       value: 1.1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7794473289764479680, guid: 472d62cf374b9514bb73e1df43477860, type: 3}
+      propertyPath: MaxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 202490128174663788, guid: 472d62cf374b9514bb73e1df43477860, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 472d62cf374b9514bb73e1df43477860, type: 3}
 --- !u!1001 &1392441198
 PrefabInstance:
@@ -1331,6 +1336,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1064683649960329167, guid: f877a7c00dceb534b816614c383e52df, type: 3}
+      propertyPath: MaxHealth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1109603803533926985, guid: f877a7c00dceb534b816614c383e52df, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -1391,7 +1400,9 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1043716541663102943, guid: f877a7c00dceb534b816614c383e52df, type: 3}
+    - {fileID: 6885703165471761980, guid: f877a7c00dceb534b816614c383e52df, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f877a7c00dceb534b816614c383e52df, type: 3}
 --- !u!1001 &6194759047356070086
 PrefabInstance:

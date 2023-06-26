@@ -15,7 +15,7 @@ namespace RPG.Combat
 
         Health target = null;
 
-        float timeSinceLastAttack = 0f; 
+        float timeSinceLastAttack = Mathf.Infinity; 
 
         private void Awake()
         {
@@ -30,7 +30,7 @@ namespace RPG.Combat
             bool isInRange = Vector3.Distance(transform.position, target.transform.position) < weaponRange;
             if(!isInRange)
             {
-                GetComponent<Mover>().MoveTarget(target.transform.position);
+                GetComponent<Mover>().StartMoveAction(target.transform.position);
             }
             else
             {
@@ -51,7 +51,10 @@ namespace RPG.Combat
 
         public void SetAttackTarget(GameObject combatTarget)
         {
-            target = combatTarget.GetComponent<Health>();
+            if(combatTarget == null)   
+                target = null;
+            else
+                target = combatTarget.GetComponent<Health>();
         }
 
         public bool CanAttack(GameObject combatTarget)

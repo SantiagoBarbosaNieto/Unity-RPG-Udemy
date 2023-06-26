@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 //Project namespaces Dependencies
 using RPG.Movement;
 using RPG.Combat;
+using RPG.Core;
 
 namespace RPG.Control
 {
@@ -25,6 +25,7 @@ namespace RPG.Control
         // Update is called once per frame
         void Update()
         {
+            if(GetComponent<Health>() == null || GetComponent<Health>().IsDead) return;
             if(InteractCombat()) return;
             if(InteractMovement()) return;
 
@@ -38,7 +39,7 @@ namespace RPG.Control
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
                 if(target == null) continue;
-                if(Input.GetMouseButtonDown(0))
+                if(Input.GetMouseButton(0))
                 {
                     GetComponent<Fighter>().SetAttackTarget(target.gameObject);
                 }
@@ -50,7 +51,7 @@ namespace RPG.Control
 
         private bool InteractMovement()
         {
-            if(GetComponent<Health>() == null || GetComponent<Health>().IsDead) return false;
+            
             Ray ray = GetMouseRay();
             RaycastHit[] hits = Physics.RaycastAll(ray);
             foreach(RaycastHit hit in hits)
@@ -61,7 +62,7 @@ namespace RPG.Control
 
                 if(isEditor)
                 {
-                    Debug.DrawRay(ray.origin, ray.direction * 10, Color.red, 0.01f, true);
+                    Debug.DrawRay(ray.origin, ray.direction * 10, Color.red, 0.01f, false);
                 }
                  
                 return true;

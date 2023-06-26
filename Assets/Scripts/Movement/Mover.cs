@@ -67,7 +67,8 @@ namespace RPG.Movement
     {
         if(target != null)
             target.position = targetPoint;
-        navMeshAgent.SetDestination(targetPoint);
+        if(navMeshAgent.isActiveAndEnabled)
+            navMeshAgent.SetDestination(targetPoint);
     }
 
     private void UpdateAnimator()
