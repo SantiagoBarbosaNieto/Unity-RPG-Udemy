@@ -103,7 +103,8 @@ namespace RPG.Control
         private bool AtWaypoint()
         {
             if(patrolPath == null) return true;
-            float distanceToWaypoint = Vector3.Distance(transform.position, patrolPath.GetWaypoint(currentWaypoint));
+            float distanceToWaypoint = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), 
+                                                        new Vector2(patrolPath.GetWaypoint(currentWaypoint).x, patrolPath.GetWaypoint(currentWaypoint).z));
             return distanceToWaypoint < waypointTolerance;
         }
 
