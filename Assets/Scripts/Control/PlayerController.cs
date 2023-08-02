@@ -72,7 +72,7 @@ namespace RPG.Control
 
         private void MovePlayerTarget(Vector3 point)
         {
-            GetComponent<Mover>().StartMoveAction(point);
+            GetComponent<Mover>().StartMoveAction(point, 1f);
         }
 
         private static Ray GetMouseRay()

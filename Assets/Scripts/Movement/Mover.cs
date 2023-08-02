@@ -11,6 +11,7 @@ namespace RPG.Movement
 {
 
     [SerializeField] Transform target;
+    [SerializeField] float maxSpeed;
 
     NavMeshAgent navMeshAgent;
 
@@ -45,14 +46,15 @@ namespace RPG.Movement
         UpdateAnimator();
     }
 
-    public void StartMoveAction(Vector3 point)
+    public void StartMoveAction(Vector3 point, float speedFraction)
     {
         GetComponent<ActionScheduler>().StartAction(this);
-        MoveTarget(point); 
+        MoveTarget(point, speedFraction); 
     }
 
-    public void MoveTarget(Vector3 point)
+    public void MoveTarget(Vector3 point, float speedFraction)
     {
+        navMeshAgent.speed = maxSpeed * Mathf.Clamp01(speedFraction);
         targetPoint = point;
         navMeshAgent.isStopped = false;
 

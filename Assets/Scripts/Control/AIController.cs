@@ -13,10 +13,12 @@ namespace RPG.Control
         [SerializeField] float suspicionTime = 5f;
         [SerializeField] float waypointTolerance = 0.5f;
         [SerializeField] float dwellTime = 3f;
+        [Range(0,1)]
+        [SerializeField] float patrolSpeedFraction = 0.2f;
+
+
         [SerializeField] PatrolPath patrolPath;
-
         private Vector3 lastKnownTargetLocation;
-
         private Fighter fighter;
         private GameObject player;
 
@@ -67,7 +69,7 @@ namespace RPG.Control
         private void SuspiciousBehaviour()
         {
             fighter.SetAttackTarget(null);
-            GetComponent<Mover>().StartMoveAction(lastKnownTargetLocation);
+            GetComponent<Mover>().StartMoveAction(lastKnownTargetLocation, 1f);
         }
 
         private void PatrolBehaviour()
@@ -85,7 +87,7 @@ namespace RPG.Control
                 }
                 nextPosition = GetCurrentWaypoint();
             }
-            GetComponent<Mover>().StartMoveAction(nextPosition);
+            GetComponent<Mover>().StartMoveAction(nextPosition, patrolSpeedFraction);
         }
 
         private Vector3 GetCurrentWaypoint()

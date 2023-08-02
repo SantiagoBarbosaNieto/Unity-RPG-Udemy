@@ -120,6 +120,14 @@ PrefabInstance:
       propertyPath: weaponDamage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4622825619437035037, guid: 3c2b1464e4e64a741b9da468841fc530, type: 3}
+      propertyPath: maxSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746898768277722517, guid: 3c2b1464e4e64a741b9da468841fc530, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 5746898768277722517, guid: 3c2b1464e4e64a741b9da468841fc530, type: 3}
       propertyPath: m_Name
       value: Player

@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  maxSpeed: 5
 --- !u!114 &3885365641521235410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +223,7 @@ MonoBehaviour:
   suspicionTime: 5
   waypointTolerance: 0.5
   dwellTime: 3
+  patrolSpeedFraction: 0.2
   patrolPath: {fileID: 0}
 --- !u!1 &7067974103869161749
 GameObject:
